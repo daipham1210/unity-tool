@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 .vscode
 assets/
+*.sqlite3
+.DS_Store
