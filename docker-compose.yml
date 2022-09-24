@@ -18,7 +18,7 @@ services:
     image: redis:alpine
   celery:
     build: ./src
-    command: celery -A src worker -l info
+    command: celery -A core worker -l info
     volumes:
       - ./src/:/usr/src/app/
     environment:
@@ -29,7 +29,7 @@ services:
       - redis
   celery-beat:
     build: ./src
-    command: celery -A src beat -l info
+    command: celery -A core beat -l info
     volumes:
       - ./src/:/usr/src/app/
     environment:
