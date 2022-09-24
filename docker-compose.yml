@@ -2,10 +2,10 @@ version: '3.8'
 
 services:
   web:
-    build: ./unity
+    build: ./src
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./unity/:/usr/src/app/
+      - ./src/:/usr/src/app/
     ports:
       - 1337:8000
     environment:
@@ -17,10 +17,10 @@ services:
   redis:
     image: redis:alpine
   celery:
-    build: ./unity
-    command: celery -A unity worker -l info
+    build: ./src
+    command: celery -A src worker -l info
     volumes:
-      - ./unity/:/usr/src/app/
+      - ./src/:/usr/src/app/
     environment:
       - DEBUG=1
       - SECRET_KEY=dbaa1_i7%*3r9-=z-+_mz4r-!qeed@(-a_r(g@k8jo8y3r27%m
@@ -28,10 +28,10 @@ services:
     depends_on:
       - redis
   celery-beat:
-    build: ./unity
-    command: celery -A unity beat -l info
+    build: ./src
+    command: celery -A src beat -l info
     volumes:
-      - ./unity/:/usr/src/app/
+      - ./src/:/usr/src/app/
     environment:
       - DEBUG=1
       - SECRET_KEY=dbaa1_i7%*3r9-=z-+_mz4r-!qeed@(-a_r(g@k8jo8y3r27%m
